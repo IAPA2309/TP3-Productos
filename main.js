@@ -34,7 +34,7 @@ let contador = 1;
 
 for (let i = 0; i < categorias.length; i++) {
   const opcion = document.createElement("option");
-  opcion.value = contador++;
+  opcion.value = categorias[i];
   opcion.text =
     categorias[i].charAt(0).toUpperCase() +
     categorias[i].slice(1).replace("-", " ");
@@ -61,7 +61,7 @@ prevBtn.addEventListener('click', () => {
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
   console.log(e.target);
-  console.log(search.value);
+  if(search.value == search.value.trim()) return;
   traerProductos(`https://dummyjson.com/products/search?q=${search.value}`);
 })
 
@@ -86,15 +86,15 @@ const insertarProductos = (productos) => {
         element.category = element.category.charAt(0).toUpperCase() + element.category.slice(1);
         
         cardProducto.innerHTML = `
-        <div class="col" id="${element.id}">
+        <div class="col">
             <div class="card" style="width: 18rem;">
-              <img src="${element.images[0]}" class="card-img-top" alt="..." height="250px">
+              <img src="${element.thumbnail}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title h4">${element.title}</h5>
                 <p class="card-text"><small>${element.category}</small></p>
-                <p class="card-text">${element.description}.</p>
+                <p class="card-text text-truncate">${element.description}.</p>
                 <p class="card-text h6">$${element.price}</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="${element.id}">
                   See
                 </button>
               </div>
@@ -105,8 +105,17 @@ const insertarProductos = (productos) => {
     });
 }
 
-// modal.addEventListener('click', e => {
-//   console.log(e);
-// })
+productosDiv.addEventListener('click', e => {
+  if(e.target.id.trim() == "") return;
+  axios
+      .get(`https://dummyjson.com/products/${e.target.id}`)
+      .then((res) => {
+        res.data.category = res.data.category.charAt(0).toUpperCase() + res.data.category.slice(1);
+        modalTitle.innerHTML = `${res.data.title}`
+        modalBody.innerHTML = `<p><em>${res.data.category}</em></p>
+        <p>${res.data.description}</p>
+        <p><strong>$${res.data.price}</strong></p>`
+      })
+})
 
 traerProductos(currentApiUrl);
