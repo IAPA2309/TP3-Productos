@@ -9,15 +9,16 @@
 </head>
 <body>
 
-    <h1 class="h1 text-center m-5">Productos</h1>
+    <h1 class="h1 text-center m-5" href="index.html">Productos</h1>
 
     <form id="formulario">
       <input type="text" id="search" autocomplete="off" placeholder="Buscar...">
       <input type="submit" value="Buscar" class="btn" id="btn-add">
     </form>
-    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
-    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
-    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
+    <select class="form-select" aria-label="Default select example" id="categorias">
+      <option selected>Select filter</option>
+      <option value="1">Smartphones</option>
+    </select>
 
     <div class="container">
         <div class="row row-cols-auto" id="productosDiv">
@@ -40,6 +41,23 @@
               </ul>
             </nav>
         </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
 

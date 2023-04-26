@@ -4,6 +4,41 @@ const prevBtn = document.getElementById("prevBtn");
 const search = document.getElementById("search");
 const form = document.getElementById("formulario");
 
+const categorias = [
+  "smartphones",
+  "laptops",
+  "fragrances",
+  "skincare",
+  "groceries",
+  "home-decoration",
+  "furniture",
+  "tops",
+  "womens-dresses",
+  "womens-shoes",
+  "mens-shirts",
+  "mens-shoes",
+  "mens-watches",
+  "womens-watches",
+  "womens-bags",
+  "womens-jewellery",
+  "sunglasses",
+  "automotive",
+  "motorcycle",
+  "lighting",
+];
+
+const selectCategorias = document.getElementById("categorias");
+let contador = 1;
+
+for (let i = 0; i < categorias.length; i++) {
+  const opcion = document.createElement("option");
+  opcion.value = contador++;
+  opcion.text =
+    categorias[i].charAt(0).toUpperCase() +
+    categorias[i].slice(1).replace("-", " ");
+  selectCategorias.appendChild(opcion);
+}
+
 let limiteProductosUrl = 12;
 let skipProductosUrl = 0;
 let currentApiUrl = `https://dummyjson.com/products?limit=${limiteProductosUrl}&skip=${skipProductosUrl}`;
@@ -46,6 +81,7 @@ const insertarProductos = (productos) => {
     productos.data.products.forEach(element => {
 
         const cardProducto = document.createElement("div");
+        element.category = element.category.charAt(0).toUpperCase() + element.category.slice(1);
         
         cardProducto.innerHTML = `
         <div class="col">
@@ -56,7 +92,9 @@ const insertarProductos = (productos) => {
                 <p class="card-text"><small>${element.category}</small></p>
                 <p class="card-text">${element.description}.</p>
                 <p class="card-text h6">$${element.price}</p>
-                <a href="#" class="btn btn-primary">Ver</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  See
+                </button>
               </div>
             </div>
         </div>
