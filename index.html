@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>TP3 - Productos</title>
+</head>
+<body>
+
+    <h1 class="h1 text-center m-5">Productos</h1>
+
+    <form id="formulario">
+      <input type="text" id="search" autocomplete="off" placeholder="Buscar...">
+      <input type="submit" value="Buscar" class="btn" id="btn-add">
+    </form>
+    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
+    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
+    <a class="btn btn-primary" href="#" id="nextBtn">Siguiente</a>
+
+    <div class="container">
+        <div class="row row-cols-auto" id="productosDiv">
+
+        </div>
+
+
+        <div id="paginate" class="text-center my-3">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" href="#" id="prevBtn">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" id="nextBtn">Siguiente</a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>
