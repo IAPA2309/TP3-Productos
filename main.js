@@ -3,6 +3,8 @@ const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const search = document.getElementById("search");
 const form = document.getElementById("formulario");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
 
 const categorias = [
   "smartphones",
@@ -84,7 +86,7 @@ const insertarProductos = (productos) => {
         element.category = element.category.charAt(0).toUpperCase() + element.category.slice(1);
         
         cardProducto.innerHTML = `
-        <div class="col">
+        <div class="col" id="${element.id}">
             <div class="card" style="width: 18rem;">
               <img src="${element.images[0]}" class="card-img-top" alt="..." height="250px">
               <div class="card-body">
@@ -102,5 +104,9 @@ const insertarProductos = (productos) => {
         productosDiv.append(cardProducto);
     });
 }
+
+// modal.addEventListener('click', e => {
+//   console.log(e);
+// })
 
 traerProductos(currentApiUrl);
