@@ -5,6 +5,7 @@ const search = document.getElementById("search");
 const form = document.getElementById("formulario");
 const modalTitle = document.getElementById("modalTitle");
 const modalBody = document.getElementById("modalBody");
+const categoriasSelect = document.getElementById("categorias");
 
 const categorias = [
   "smartphones",
@@ -60,9 +61,13 @@ prevBtn.addEventListener('click', () => {
 });
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
-  console.log(e.target);
-  if(search.value == search.value.trim()) return;
-  traerProductos(`https://dummyjson.com/products/search?q=${search.value}`);
+  if(search.value.trim() == "" ) return;
+  console.log("seas")
+  traerProductos(`https://dummyjson.com/products/search?q=${search.value}&limit=12&skip=0`);
+})
+
+categoriasSelect.addEventListener("change", () => {
+  traerProductos(`https://dummyjson.com/products/category/${categoriasSelect.value}`);
 })
 
 const traerProductos = (url) => {
@@ -106,7 +111,7 @@ const insertarProductos = (productos) => {
 }
 
 productosDiv.addEventListener('click', e => {
-  if(e.target.id.trim() == "") return;
+  if(e.target.id.trim() == "" || e.target.id == "productosDiv") return;
   axios
       .get(`https://dummyjson.com/products/${e.target.id}`)
       .then((res) => {
