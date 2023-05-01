@@ -6,6 +6,7 @@ const form = document.getElementById("formulario");
 const modalTitle = document.getElementById("modalTitle");
 const modalBody = document.getElementById("modalBody");
 const categoriasSelect = document.getElementById("categorias");
+const paginate = document.getElementById("paginate");
 
 const categorias = [
   "smartphones",
@@ -67,6 +68,7 @@ form.addEventListener('submit', (e)=>{
 })
 
 categoriasSelect.addEventListener("change", () => {
+  if(categoriasSelect.value == 'Search by category...') return
   traerProductos(`https://dummyjson.com/products/category/${categoriasSelect.value}`);
 })
 
@@ -76,6 +78,8 @@ const traerProductos = (url) => {
       .then((res) => {
         console.log(res);
         insertarProductos(res);
+        if(res.data.total < 12) paginate.classList.add("d-none");
+        if(res.data.total == 0) productosDiv.innerHTML = `No se han encontrado los productos.`;
       })
       .catch(function (error) {
         productosDiv.innerHTML = `No se han encontrado los productos.`;
@@ -83,31 +87,30 @@ const traerProductos = (url) => {
 }
 
 const insertarProductos = (productos) => {
-    productosDiv.innerHTML = ``;
-
-    productos.data.products.forEach(element => {
-
-        const cardProducto = document.createElement("div");
-        element.category = element.category.charAt(0).toUpperCase() + element.category.slice(1);
-        
-        cardProducto.innerHTML = `
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="${element.thumbnail}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title h4">${element.title}</h5>
-                <p class="card-text"><small>${element.category}</small></p>
-                <p class="card-text text-truncate">${element.description}.</p>
-                <p class="card-text h6">$${element.price}</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="${element.id}">
-                  See
-                </button>
-              </div>
+  productosDiv.innerHTML = ``;
+  productos.data.products.forEach(element => {
+      const cardProducto = document.createElement("div");
+      cardProducto.classList.add("col-lg-3", "mb-3", "d-flex", "align-items-stretch", "justify-content-center");
+      element.category = element.category.charAt(0).toUpperCase() + element.category.slice(1);
+      
+      cardProducto.innerHTML = `
+        <div class="card">
+          <img src="${element.thumbnail}" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title h4 mb-0 fw-bold">${element.title}</h5>
+            <p class="card-text mb-2 fw-medium"><small>${element.category}</small></p>
+            <p class="card-text text">${element.description}.</p>
+            <div class="mt-auto d-grid gap-2">
+              <p class="card-text h3 fw-bold text-primary text-center">$${element.price}</p>
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="${element.id}">
+                See
+              </button>
             </div>
+          </div>
         </div>
-        `;
-        productosDiv.append(cardProducto);
-    });
+      `;
+      productosDiv.append(cardProducto);
+  });
 }
 
 productosDiv.addEventListener('click', e => {
@@ -122,5 +125,14 @@ productosDiv.addEventListener('click', e => {
         <p><strong>$${res.data.price}</strong></p>`
       })
 })
+
+document.getElementById("btnSwitch").addEventListener("click", () => {
+  if (document.documentElement.getAttribute("data-bs-theme") == "dark") {
+    document.documentElement.setAttribute("data-bs-theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-bs-theme", "dark");
+  }
+});
+
 
 traerProductos(currentApiUrl);

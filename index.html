@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>TP3 - Productos</title>
 </head>
 <body>
-
-    <h1 class="h1 text-center m-5" href="index.html">Products</h1>
-
-    <form id="formulario">
-      <input type="text" id="search" autocomplete="off" placeholder="Search...">
-      <input type="submit" value="Search" class="btn btn-primary" id="btn-add">
-      <select class="form-select" aria-label="Default select example" id="categorias">
-        <option selected>Search by category...</option>
-      </select>
-    </form>
+  <Div class="col-auto sticky-sm-top">
+    <button class="btn btn-dark shadow" id="btnSwitch">Theme</button>
+  </Div>
+    <h1 class="h1 text-center m-5" href="index.html">Products API</h1>
 
     <div class="container">
-        <div class="row row-cols-auto" id="productosDiv">
+      <form id="formulario">
+        <div class="d-flex gap-2 mb-2">
+          <input type="text" id="search" autocomplete="off" placeholder="Search..." class="form-control">
+          <input type="submit" value="Search" class="btn btn-primary" id="btn-add">
+        </div>
+        <select class="form-select" aria-label="Default select example" id="categorias">
+          <option selected>Search by category...</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="container">
+        <div class="row mt-3 justify-content-center" id="productosDiv">
 
         </div>
-
 
         <div id="paginate" class="text-center my-3">
             <nav aria-label="Page navigation example">
